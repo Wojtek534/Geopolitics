@@ -14,7 +14,7 @@ BasicPlots = function(base)
     scale_x_continuous(limits = c(0, max(base$Surface)))+
     ggtitle("Dotplot") +
     theme(plot.title = element_text(hjust = 5)) +
-    xlab("Surface (km2)")
+    xlab("Surface (k km2)")
   #
   print(
     x = dot,
@@ -29,7 +29,7 @@ BasicPlots = function(base)
     scale_x_continuous(limits = c(0, max(base$Surface)))+
     ggtitle("Density") +
     theme(plot.title = element_text(hjust = 5))+
-    xlab("Surface (km2)")
+    xlab("Surface (k km2)")
   #
   print(
     x = dens,
@@ -49,7 +49,7 @@ BasicPlots = function(base)
     scale_x_continuous(limits = c(0, max(base$Surface)))+
     ggtitle("Points top 10") +
     theme(plot.title = element_text(hjust = 0.5))+
-    xlab("Surface (km2)") +
+    xlab("Surface (k km2)") +
     ylab("Country")
   #
   print(
@@ -58,4 +58,22 @@ BasicPlots = function(base)
       layout.pos.row = 3,
       layout.pos.col = 1))
   #
+  #axis.text.x = element_blank()
+  ggplot(
+    data = world.merge.2016,
+    aes(x = Country, y = Population))+
+    geom_point()+
+    ggtitle("Population by Country")+
+    xlab("Country")+
+    ylab("Population(mln)")+
+    theme(axis.text.x = element_blank())
+  #
+  ggplot(
+    data = world.merge.2016,
+    aes(x = Country, y = Gdp))+
+    geom_density(stat = "identity")+
+    ggtitle("Population by Country")+
+    xlab("Country")+
+    ylab("Population(mln)")+
+    theme(axis.text.x = element_blank())
 }
