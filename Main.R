@@ -1,10 +1,15 @@
 # Library
+library(lattice)
 library(tibble)
 library(dplyr)
 library(reshape2)
 library(ggplot2)
 library(readr)
 library(readxl)
+library(RColorBrewer)
+library(hexbin)
+library(grid)
+library(GGally)
 # Data
 world.surface = read_excel("~/Pulpit/RProject/Geopolitics/WorldData.xlsx", 
                 sheet = "Surface")
@@ -14,33 +19,26 @@ world.gdp = read_excel("~/Pulpit/RProject/Geopolitics/WorldData.xlsx",
             sheet = "Gdp")
 # Variables
 source('World.R')
-source('Europe.R')
-source('Poland.R')
 # Functions
 source('Functions.R')
+# Prepare Data
+source('PrepareData.R')
 # Charts
 #source('WorldPlots.R')
 #source('BasicPlots.R')
-# Merge
-world.merge.2016 = merge(select(world.population, Country, Code, Continent, '2016'), select(world.gdp, Country, '2016'), by = 'Country')
-world.merge.2016 = rename(world.merge.2016, Population=`2016.x`, Gdp = `2016.y`)
-world.merge.2016 = world.merge.2016 %>%mutate(Capita = round(Gdp/Population,2))
-# Charts
-#BasicPlots(filter(europe.surface.top, Country != "Russian Federation"))
-#WorldPlots(world.merge.2016)
-# Prepare Data
-europe.series = DataTimeSeries(europe.population)
-europe.population.melt = DataMelting(europe.population.top)
-europe.gdp.melt = DataMelting(europe.gdp.top)
-europe.gdp.melt = select(europe.gdp.melt, Year, Country, Value)
-europe.gdp.melt = filter(europe.gdp.melt, Year >= 2010)
+# Colors
 #
-ggplot(
-  data = europe.gdp.melt,
-  aes(x = Year, y = Value))+
-  geom_line()+
-  facet_grid(facets = .~Country)+
-  ggtitle("Population by year")+
-  xlab("")+
-  ylab("")
-  
+europe.merged = merge(europe.population.top.melt, europe.gdp.top.melt, by = c('Country', 'Year'))
+europe.merged = rename(europe.merged, Population = Value.x, Gdp = Value.y)
+europe.merged = select(europe.merged, Year, Country, Population, Gdp)
+europe.merged = europe.merged[order((europe.merged$Year)),]
+rownames(europe.merged) = NULL
+#
+# GGally
+ggpairs(
+  data = europe.merged,
+  columns = c(1,3,4)
+)
+
+
+
