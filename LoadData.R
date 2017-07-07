@@ -1,5 +1,21 @@
+#
+library(readr)
+library(readxl)
+# Data
+world.base = read_excel("~/Pulpit/RProject/Geopolitics/Data/WorldData.xlsx", 
+                           sheet = "Surface")
+world.population = read_excel("~/Pulpit/RProject/Geopolitics/Data/WorldData.xlsx", 
+                              sheet = "Population")
+world.gdp = read_excel("~/Pulpit/RProject/Geopolitics/Data/WorldData.xlsx", 
+                       sheet = "Gdp")
+#
+#
+#
+#
+#
+#
 # To k km2
-world.surface$Surface = world.surface$Surface/1000
+world.base$Surface = world.base$Surface/1000
 
 # To bln $
 world.gdp$`1990` = round(world.gdp$`1990`/1000000000, 2)
@@ -57,4 +73,3 @@ world.population$`2013` = round(world.population$`2013`/1000000, 2)
 world.population$`2014` = round(world.population$`2014`/1000000, 2)
 world.population$`2015` = round(world.population$`2015`/1000000, 2)
 world.population$`2016` = round(world.population$`2016`/1000000, 2)
-#

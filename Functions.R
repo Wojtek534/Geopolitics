@@ -1,4 +1,6 @@
 #
+library(reshape2)
+#
 DataTimeSeries = function(data)
 {
   # Get old column names with 1990 - 2016 and remove 3 columns (Country, Code, Continent)
@@ -31,3 +33,27 @@ DataMelting = function(data)
   # Return
   return(new.data)
 }
+#
+DataMerge = function(primary, secondary, third)
+{
+  new.data = merge(primary, secondary, by = c('Country', 'Year'))
+  #new.data = select(new.data, Year, Country, Continent, Population, Gdp)
+  #new.data = new.data[order((new.data$Year)),]
+  new.data = merge(new.data, third, by = 'Country')
+  new.data = rename(new.data, Population = Value.x, Gdp = Value.y)
+  new.data = new.data %>%mutate(Capita = round(Gdp/Population,2))
+  new.data = select(new.data, Year, Country,Code, Continent, Population, Gdp, Capita, Surface, Latitute, Longitude)
+  rownames(new.data) = NULL
+  return(new.data)
+}
+#
+DataAggregateMerge = function(primary, secondary)
+{
+  new.data = merge(primary, secondary, by = c('Continent', 'Year'))
+  new.data = rename(new.data, Population = x.x, Gdp = x.y)
+  new.data = new.data[order((new.data$Year)),]
+  new.data = new.data[, c(2,1,3,4)]
+  rownames(new.data) = NULL
+  return(new.data)
+}
+#
