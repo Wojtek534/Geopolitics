@@ -8,6 +8,23 @@ world.population = read_excel("~/Pulpit/RProject/Geopolitics/Data/WorldData.xlsx
                               sheet = "Population")
 world.gdp = read_excel("~/Pulpit/RProject/Geopolitics/Data/WorldData.xlsx", 
                        sheet = "Gdp")
+
+world = read_excel("~/Pulpit/RProject/Geopolitics/Data/WorldData.xlsx", 
+        sheet = "DataExtended")
+world = filter(world, Continent %in% c('Europe', 'Asia', 'Africa', 'South America', 'North America', 'Australia and Oceania'))
+world$Longitude = as.numeric(as.character(world$Longitude))
+world$Latitute = as.numeric(as.character(world$Latitude))
+world$Surface = as.numeric(as.character(world$Surface))
+world$Gdp = as.numeric(as.character(world$Gdp))
+world$Population = as.numeric(as.character(world$Population))
+world$Capita = as.numeric(as.character(world$Capita))
+#
+world$Gdp = round(world$Gdp/1000000000,2)
+world$Population = round(world$Population/1000000,2)
+world$Capita = round(world$Capita,2)
+#
+#world$Gdp = world$Gdp/1000000000
+
 #
 #
 #

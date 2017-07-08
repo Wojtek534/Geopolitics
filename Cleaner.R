@@ -1,5 +1,5 @@
 #
-rm(world.base)
+#rm(world.base)
 #
 rm(world.gdp)
 rm(world.gdp.melt)

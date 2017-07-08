@@ -21,3 +21,5 @@ world.merged.agg = DataAggregateMerge(
                   FUN = sum))
 world.merged.agg = world.merged.agg %>%mutate(Capita = round(Gdp/Population,2))
 #
+#world = filter(world.merged, Year == 2016)
+#

@@ -42,7 +42,7 @@ DataMerge = function(primary, secondary, third)
   new.data = merge(new.data, third, by = 'Country')
   new.data = rename(new.data, Population = Value.x, Gdp = Value.y)
   new.data = new.data %>%mutate(Capita = round(Gdp/Population,2))
-  new.data = select(new.data, Year, Country,Code, Continent, Population, Gdp, Capita, Surface, Latitute, Longitude)
+  new.data = select(new.data, Year, Country,Code, Continent, Population, Gdp, Capita, Surface, Latitude, Longitude)
   rownames(new.data) = NULL
   return(new.data)
 }

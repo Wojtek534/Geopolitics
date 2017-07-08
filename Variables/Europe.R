@@ -21,4 +21,6 @@ if (load.europe == T)
 europe.merged = filter(world.merged, Continent == 'Europe')
 europe.merged.agg = filter(world.merged.agg, Continent == 'Europe')
 #
+europe = filter(world, Continent == 'Europe')
+#
 }
