@@ -17,7 +17,7 @@ map.europe.population = ggplot(
   geom_polygon(
     aes(
       x = Longitude,
-      y = Latitute,
+      y = Latitude,
       group = Group,
       fill = Population),
     color = "grey60")+
@@ -47,7 +47,7 @@ map.europe.gdp = ggplot(
   geom_polygon(
     aes(
       x = Longitude,
-      y = Latitute,
+      y = Latitude,
       group = Group,
       fill = Gdp),
     color = "grey60")+
@@ -77,7 +77,7 @@ map.europe.capita  = ggplot(
   geom_polygon(
     aes(
       x = Longitude,
-      y = Latitute,
+      y = Latitude,
       group = Group,
       fill = Capita),
     color = "grey60")+
